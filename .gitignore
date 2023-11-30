@@ -1,3 +1,7 @@
+# Created by https://www.toptal.com/developers/gitignore/api/node,vue
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,vue
+
+### Node ###
 # Logs
 logs
 *.log
@@ -73,7 +77,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-*.env
+.env
 .env.development.local
 .env.test.local
 .env.production.local
@@ -102,7 +106,6 @@ dist
 
 # vuepress v2.x temp and cache directory
 .temp
-.cache
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -128,3 +131,25 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+### Node Patch ###
+# Serverless Webpack directories
+.webpack/
+
+# Optional stylelint cache
+
+# SvelteKit build / generate output
+.svelte-kit
+
+### Vue ###
+# gitignore template for Vue.js projects
+#
+# Recommended template: Node.gitignore
+
+# TODO: where does this rule come from?
+docs/_book
+
+# TODO: where does this rule come from?
+test/
+
+# End of https://www.toptal.com/developers/gitignore/api/node,vue

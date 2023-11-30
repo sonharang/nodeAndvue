@@ -15,7 +15,7 @@ export default {
     }
 }
 </script>
-<style>
+<style scoped> /*scoped쓰면 자신한테만 적용 */
     p{
         background-color: rgb(15, 237, 119);
     }

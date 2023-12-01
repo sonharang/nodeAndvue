@@ -4,7 +4,9 @@
     <!-- <router-link to="/about">About</router-link> -->
     <router-link to="/databinding">Data Binding</router-link> |
     <router-link to="/listbinding">List Binding</router-link> |
-    <router-link to="/ifbinding">IF Binding</router-link>
+    <router-link to="/ifbinding">IF Binding</router-link> |
+    <router-link to="/onevent">On Event</router-link> |
+    <router-link to="/options">Options</router-link>
   </nav>
   <router-view />
 </template>

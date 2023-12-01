@@ -1,6 +1,7 @@
 <template>
   <div>
     <button v-on:click="addData">+</button>
+    <button v-on:click="delData">-</button>
     <table>
       <thead>
         <tr>
@@ -16,6 +17,7 @@
           <td>{{ product.price }}</td>
           <td>{{ product.category }}</td>
           <td>{{ product.delivery_price }}</td>
+          <td><button v-on:click="minusData(index)">x</button></td>
         </tr>
       </tbody>
     </table>
@@ -69,10 +71,17 @@ export default {
         category: "노트북/태블릿",
         delivery_price: 5000,
       };
-      this.productList[this.productList.length] = obj;
+      //this.productList[this.productList.length] = obj;
+      this.productList.push(obj);
     },
     /* => addData : function(){
             }*/
+    delData() {
+      this.productList.pop();
+    },
+    minusData(index) {
+      this.productList.splice(index, 1);
+    },
   },
 };
 </script>

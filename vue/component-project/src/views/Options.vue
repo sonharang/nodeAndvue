@@ -10,25 +10,25 @@
   </div>
 </template>
 <script>
-const computed = {
-  data() {
-    return {
-      price: 0,
-      count: 0,
-    };
-  },
-  computed: {
-    amount() {
-      return this.price * this.count;
-    },
-    tax() {
-      return this.amount * 0.1;
-    },
-    total() {
-      return this.amount + this.tax;
-    },
-  },
-};
+// const computed = {
+//   data() {
+//     return {
+//       price: 0,
+//       count: 0,
+//     };
+//   },
+//   computed: {
+//     amount() {
+//       return this.price * this.count;
+//     },
+//     tax() {
+//       return this.amount * 0.1;
+//     },
+//     total() {
+//       return this.amount + this.tax;
+//     },
+//   },
+// };
 
 const watch = {
   data() {

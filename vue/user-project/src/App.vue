@@ -1,7 +1,21 @@
 <template>
-  <nav><router-link to="/userList">UserList</router-link> |</nav>
-  <router-view />
+  <!--<nav>
+    <router-link to="/">UserList</router-link> |
+    <router-link to="/userInsert">UserInsert</router-link> |
+  </nav>-->
+  <div>
+    <Header />
+    <router-view />
+  </div>
 </template>
+<script>
+import Header from "./layouts/Header.vue";
+export default {
+  components: {
+    Header: Header,
+  },
+};
+</script>
 
 <style>
 #app {

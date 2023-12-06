@@ -32,6 +32,7 @@
           <td>{{ info.category }}</td>
           <td>{{ info.product_id }}</td>
           <td>{{ info.product_name }}</td>
+          <td><button v-on:click="minusData(idx)">x</button></td>
         </tr>
       </tbody>
     </table>
@@ -64,7 +65,11 @@ export default {
         product_name: this.productInfo.product_name,
         category: this.productInfo.category,
       };
-      this.$store.commit("addProduct", obj);
+      // this.$store.commit("addProduct", obj);//mutation
+      this.$store.dispatch("addProduct", obj); //actions
+    },
+    minusData(idx) {
+      this.productList.splice(idx, 1);
     },
   },
 };

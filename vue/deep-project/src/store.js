@@ -1,5 +1,6 @@
 //store.js
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
   state() {
@@ -22,6 +23,7 @@ const store = createStore({
     },
   },
   mutations: {
+    //state만 변경가능
     increment(state) {
       state.count++;
     },
@@ -29,11 +31,19 @@ const store = createStore({
       state.cart.push(info);
     },
   },
-  //     actions: {
-  //         addProduct(state, info) {
-
-  //       }
-  //   },
+  actions: {
+    //전체 정보 불러와서 접근
+    addProduct(context, info) {
+      setTimeout(() => {
+        context.commit("addProduct", info);
+      }, 1000);
+    },
+  },
+  plugins: [
+    createPersistedState({
+      paths: ["cart"],
+    }),
+  ],
 });
 
 export default store;

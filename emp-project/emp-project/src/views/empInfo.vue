@@ -36,15 +36,15 @@
         </tr>
       </table>
     </div>
-    <!-- <div class="row">
-      <button class="btn btn-info" @click="updateInfo(empInfo.emp_no)">
+     <div class="row">
+      <button class="btn btn-info" @click="updateEmp(empInfo.emp_no)">
         수정
       </button>
       <router-link to="/" class="btn btn-success">목록</router-link>
-      <button class="btn btn-warning" @click="deleteInfo(empInfo.emp_no)">
+      <button class="btn btn-warning" @click="deleteEmp(empInfo.emp_no)">
         삭제
       </button>
-    </div> -->
+    </div> 
   </div>
 </template>
 <script>
@@ -71,7 +71,7 @@ export default {
     },
   },
   created() {
-    this.searchNo = this.$route.query.emp_no;
+    this.searchNo = this.$route.query.no;
     this.getEmpInfo();
   },
   methods: {
@@ -84,22 +84,22 @@ export default {
       let Info = result.data;
       this.empInfo = Info;
     },
-    // async deleteInfo(empNo) {
-    //   let result = await axios
-    //     .delete(`/api/emps/${empNo}`)
-    //     .catch((err) => console.log(err));
-    //   console.log(result.data);
-    //   let count = result.data.affectedRows;
-    //   if (count == 0) {
-    //     alert("정상적으로 삭제되지 않았습니다.");
-    //   } else {
-    //     alert("정상적으로 삭제되었습니다.");
-    //     this.$router.push({ name: `emplist` });
-    //   }
-    // },
-    // updateInfo(no) {
-    //   this.$router.push({ path: `/empUpdate`, query: { empNo: no } });
-    // },
+     async deleteEmp(empNo) {
+       let result = await axios
+         .delete(`/api/emps/${empNo}`)
+         .catch((err) => console.log(err));
+       console.log(result.data);
+       let count = result.data.affectedRows;
+       if (count == 0) {
+         alert("정상적으로 삭제되지 않았습니다.");
+       } else {
+         alert("정상적으로 삭제되었습니다.");
+         this.$router.push({ name: `emplist` });
+       }
+     },
+     updateEmp(Eno) {
+       this.$router.push({ path: `/empUpdate`, query: { no: Eno } });
+     },
   },
 };
 </script>

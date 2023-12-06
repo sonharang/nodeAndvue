@@ -64,9 +64,9 @@ export default {
       let list = result.data;
       this.empList = list;
     },
-    goToEmpInfo(no) {
-      console.log(no);
-      this.$router.push({ path: "/empInfo", query: { empNo: no } });
+    goToEmpInfo(Eno) {
+      console.log(Eno);
+      this.$router.push({ path: "/empInfo", query: { no: Eno } });
       //$.router -> 존재하는 라우터에 요청
       // name : route로 등록할 때 사용한 name 속성
       // params : path 속성이 '/target/:id'일때 {'id' : A}

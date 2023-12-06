@@ -25,8 +25,8 @@ app.get("/emps", async (req, res) => {
   res.send(list);
 });
 //단건조회
-app.get("/emps/:emp_no", async (req, res) => {
-  let data = req.params.emp_no;
+app.get("/emps/:no", async (req, res) => {
+  let data = req.params.no;
   let result = await mysql.query("empInfo", data);
   res.send(result[0]);
 });
@@ -39,14 +39,14 @@ app.post("/emps", async (req, res) => {
   res.send([emp, dept, sal]);
 });
 //수정
-app.put("/emps/:emp_no", async (req, res) => {
-  let datas = [req.body.param, req.params.emp_no];
+app.put("/emps/:no", async (req, res) => {
+  let datas = [req.body.param, req.params.no];
   let result = await mysql.query("empUpdate", datas);
   res.send(result);
 });
 //삭제
-app.delete("/emps/:emp_no", async (req, res) => {
-  let datas = [req.body.param, req.params.emp_no];
+app.delete("/emps/:no", async (req, res) => {
+  let datas = [req.body.param, req.params.no];
   let dept = await mysql.query("deptDelete", datas);
   let sal = await mysql.query("salaryDelete", datas);
   res.send([dept, sal]);

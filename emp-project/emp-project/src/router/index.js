@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import empList from "../views/empList.vue";
 import empInfo from "../views/empInfo.vue";
+import empInsert from "../views/empInsert.vue";
 
 const routes = [
   {
@@ -12,6 +13,11 @@ const routes = [
     path: "/empInfo",
     name: "empInfo",
     component: empInfo,
+  },
+  {
+    path: "/empInsert",
+    name: "empInsert",
+    component: empInsert,
   },
 ];
 

@@ -60,8 +60,8 @@ export default {
   methods: {
     addCart() {
       let obj = {
-        product_id: this.productList.product_id,
-        product_name: this.productList.product_name,
+        product_id: this.productInfo.product_id,
+        product_name: this.productInfo.product_name,
         category: this.productInfo.category,
       };
       this.$store.commit("addProduct", obj);

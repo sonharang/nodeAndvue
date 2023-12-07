@@ -119,10 +119,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-th,
-td {
-  border: 1px solid #444444;
-  padding: 10px;
-}
-</style>

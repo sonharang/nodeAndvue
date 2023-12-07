@@ -1,7 +1,8 @@
 module.exports = {
-  empList: `select e.emp_no,e.first_name,e.last_name,e.gender,e.hire_date,(select salary from salaries where to_date = cast('9999-01-01' as date) and emp_no = e.emp_no) as salary,
+  empList: `select e.emp_no,e.first_name,e.last_name,e.gender,e.birth_date,e.hire_date,(select salary from salaries where to_date = cast('9999-01-01' as date) and emp_no = e.emp_no) as salary,
   d.dept_no,
-  d.dept_name
+  d.dept_name,
+  h.from_date
   from employees e join dept_emp h
           on(e.emp_no = h.emp_no)
                   join departments d
@@ -12,9 +13,10 @@ module.exports = {
   and s.to_date = cast('9999-01-01' as date)
   order by e.emp_no DESC
   limit 0, 10;`,
-  empInfo: `select e.emp_no,e.first_name,e.last_name,e.gender,e.hire_date,(select salary from salaries where to_date = cast('9999-01-01' as date) and emp_no = e.emp_no) as salary,
+  empInfo: `select e.emp_no,e.first_name,e.last_name,e.gender,e.birth_date,e.hire_date,(select salary from salaries where to_date = cast('9999-01-01' as date) and emp_no = e.emp_no) as salary,
   d.dept_no,
-  d.dept_name
+  d.dept_name,
+  h.from_date
   from employees e join dept_emp h
           on(e.emp_no = h.emp_no)
                   join departments d
@@ -32,4 +34,6 @@ module.exports = {
 
   deptDelete: `UPDATE dept_emp SET to_date = ? WHERE emp_no = ?`,
   salaryDelete: `UPDATE salaries SET to_date = ? WHERE emp_no = ?`,
+
+  deptList: `select * from departments order by dept_no`,
 };

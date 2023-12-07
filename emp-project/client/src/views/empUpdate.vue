@@ -4,43 +4,76 @@
       <table class="table" style="border: 1px solid #444444">
         <tr>
           <th class="text-right table-primary">사원번호</th>
-          <td class="text-center">{{ empInfo.emp_no }}</td>
+          <td class="text-center">
+            <input type="number" v-model="empInfo.emp_no" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">부서번호</th>
-          <td class="text-center">{{ empInfo.dept_no }}</td>
+          <td class="text-center">
+            <input type="text" v-model="empInfo.dept_no" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">부서이름</th>
-          <td class="text-center">{{ empInfo.dept_name }}</td>
+          <td class="text-center">
+            <input type="text" v-model="empInfo.dept_name" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">firstName</th>
-          <td class="text-center">{{ empInfo.first_name }}</td>
+          <td class="text-center">
+            <input type="text" v-model="empInfo.first_name" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">lastName</th>
-          <td class="text-center">{{ empInfo.last_name }}</td>
+          <td class="text-center">
+            <input type="text" v-model="empInfo.last_name" />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">생년월일</th>
-          <td class="text-center">{{ dateFormat(empInfo.birth_date) }}</td>
+          <td class="text-center">
+            <input type="date" v-model="empInfo.birth_date" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">성별</th>
-          <td class="text-center">{{ empGender }}</td>
+          <td class="text-center">
+            <input
+              type="radio"
+              value="M"
+              v-model="empInfo.gender"
+              onclick="return false;"
+            />
+            남자
+            <input
+              type="radio"
+              value="F"
+              v-model="empInfo.gender"
+              onclick="return false;"
+            />
+            여자
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">입사날짜</th>
-          <td class="text-center">{{ dateFormat(empInfo.hire_date) }}</td>
+          <td class="text-center">
+            <input type="date" v-model="empInfo.hire_date" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">발령날짜</th>
-          <td class="text-center">{{ dateFormat(empInfo.from_date) }}</td>
+          <td class="text-center">
+            <input type="date" v-model="empInfo.from_date" readonly />
+          </td>
         </tr>
         <tr>
           <th class="text-right table-primary">급여</th>
-          <td class="text-center">{{ salFormat }}</td>
+          <td class="text-center">
+            <input type="number" v-model="empInfo.salary" readonly />
+          </td>
         </tr>
       </table>
     </div>
@@ -48,10 +81,7 @@
       <button class="btn btn-info" @click="updateEmp(empInfo.emp_no)">
         수정
       </button>
-      <router-link to="/empList" class="btn btn-success">목록</router-link>
-      <button class="btn btn-warning" @click="deleteEmp(empInfo.emp_no)">
-        삭제
-      </button>
+      <router-link to="/" class="btn btn-success">목록</router-link>
     </div>
   </div>
 </template>
@@ -68,9 +98,6 @@ export default {
     empGender() {
       return this.empInfo.gender == "M" ? "남자" : "여자";
     },
-    salFormat() {
-      return String(this.empInfo.salary).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    },
   },
   created() {
     this.searchNo = this.$route.query.no;
@@ -84,7 +111,7 @@ export default {
       let year = date.getFullYear();
       let month = ("0" + (date.getMonth() + 1)).slice(-2);
       let day = ("0" + date.getDate()).slice(-2);
-      return `${year}년 ${month}월 ${day}일`;
+      return `${year}-${month}-${day}`;
     },
     async getEmpInfo() {
       let result = await axios
@@ -94,27 +121,24 @@ export default {
         });
       let Info = result.data;
       this.empInfo = Info;
+      this.empInfo.hire_date = this.dateFormat(this.empInfo.hire_date);
+      this.empInfo.birth_date = this.dateFormat(this.empInfo.birth_date);
+      this.empInfo.from_date = this.dateFormat(this.empInfo.from_date);
     },
-    async deleteEmp(empNo) {
-      let data = {
+
+    async updateEmp(Eno) {
+      let datas = {
         param: {
-          to_date: "2023-12-07",
+          last_name: this.empInfo.last_name,
         },
       };
-      let result = await axios
-        .delete(`/api/emps/${empNo}`, { data: data })
-        .catch((err) => console.log(err));
-      console.log(result.data);
-      let count = result.data.affectedRows;
-      if (count == 0) {
-        alert("정상적으로 삭제되지 않았습니다.");
+      let result = await axios.put(`/api/emps/${this.empInfo.emp_no}`, datas);
+      if (result.data.changedRows == 0) {
+        alert(`수정실패\n${result.data.message}`);
       } else {
-        alert("정상적으로 삭제되었습니다.");
-        this.$router.push({ name: `empList` });
+        alert(`수정성공`);
+        this.$router.push({ path: `/empInfo`, query: { no: Eno } });
       }
-    },
-    updateEmp(Eno) {
-      this.$router.push({ path: `/empUpdate`, query: { no: Eno } });
     },
   },
 };

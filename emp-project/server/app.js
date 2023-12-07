@@ -46,8 +46,13 @@ app.put("/emps/:no", async (req, res) => {
 });
 //삭제
 app.delete("/emps/:no", async (req, res) => {
-  let datas = [req.body.param, req.params.no];
+  let datas = [req.body.param.to_date, req.params.no];
   let dept = await mysql.query("deptDelete", datas);
   let sal = await mysql.query("salaryDelete", datas);
   res.send([dept, sal]);
+});
+
+app.get("/depts", async (req, res) => {
+  let result = await mysql.query(`deptList`);
+  res.send(result);
 });

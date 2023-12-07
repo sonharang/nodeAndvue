@@ -9,14 +9,16 @@
       </caption>
       <thead>
         <tr>
-          <th>No.</th>
-          <th>firstName</th>
-          <th>lastName</th>
-          <th>성별</th>
-          <th>입사날짜</th>
-          <th>급여</th>
+          <th>사원번호</th>
           <th>부서번호</th>
           <th>부서이름</th>
+          <th>firstName</th>
+          <th>lastName</th>
+          <th>생년월일</th>
+          <th>성별</th>
+          <th>입사날짜</th>
+          <th>발령날짜</th>
+          <th>급여</th>
         </tr>
       </thead>
       <tbody>
@@ -26,13 +28,15 @@
           @click="goToEmpInfo(emp.emp_no)"
         >
           <td>{{ emp.emp_no }}</td>
-          <td>{{ emp.first_name }}</td>
-          <td>{{ emp.last_name }}</td>
-          <td>{{ emp.gender }}</td>
-          <td>{{ dateFormat(emp.hire_date, "yyyy년 MM월 dd일") }}</td>
-          <td>{{ emp.salary }}</td>
           <td>{{ emp.dept_no }}</td>
           <td>{{ emp.dept_name }}</td>
+          <td>{{ emp.first_name }}</td>
+          <td>{{ emp.last_name }}</td>
+          <td>{{ dateFormat(emp.birth_date, "yyyy년 MM월 dd일") }}</td>
+          <td>{{ emp.gender }}</td>
+          <td>{{ dateFormat(emp.hire_date, "yyyy년 MM월 dd일") }}</td>
+          <td>{{ dateFormat(emp.from_date, "yyyy년 MM월 dd일") }}</td>
+          <td>{{ emp.salary }}</td>
         </tr>
       </tbody>
     </table>
